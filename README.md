@@ -43,6 +43,11 @@ That runs two things together: Tailwind, which rebuilds `dist/styles.css` every 
 
 Open the site through that address rather than double-clicking `index.html`. The pages load `data/tools.json` with `fetch`, and browsers block that for files opened directly.
 
+## Decisions
+
+- Catalog results keep the order supplied by `tools.json`.
+- Selecting **Join waitlist** for a checked-out tool opens the confirmation screen with waitlist-specific copy. It does not persist a request.
+
 ## Tools used
 
-`[Name the AI coding tool you used and how you used it. This is the disclosure line, and it stays in the README for the rest of the term.]`
+Built with Codex for the page structure, filtering logic, client-side routing, and accessibility checks.

@@ -13,8 +13,9 @@
 
 @theme {
   /* surfaces and ink */
-  --color-surface: #fbfaf7;
+  --color-surface: #fdf9fa;
   --color-surface-raised: #ffffff;
+  --color-surface-image: #fbf9f7;
   --color-border: #e4dfd5;
   --color-ink: #1c1b19;
   --color-ink-muted: #57534e;
@@ -30,10 +31,10 @@
   /* availability: one pair per value of the availability enum */
   --color-status-available: #2f6b3f;
   --color-status-available-bg: #e9f1eb;
-  --color-status-out: #8a5a12;
-  --color-status-out-bg: #f7efe0;
-  --color-status-repair: #8b2f2f;
-  --color-status-repair-bg: #f7e9e9;
+  --color-status-out: #92400e;
+  --color-status-out-bg: #fdf5e6;
+  --color-status-repair: #991b1b;
+  --color-status-repair-bg: #fef2f2;
   --color-status-hold: #2d4b8a;
   --color-status-hold-bg: #e8edf7;
 
@@ -62,6 +63,16 @@
 /* Focus is a requirement in the specification, not a preference.
    If you remove this rule you have to replace it with something equivalent. */
 @layer base {
+  html {
+    background: var(--color-surface);
+  }
+
+  button,
+  input,
+  select {
+    font: inherit;
+  }
+
   :focus-visible {
     outline: 2px solid var(--color-focus);
     outline-offset: 2px;
