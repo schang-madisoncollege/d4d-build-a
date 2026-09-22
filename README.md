@@ -1,6 +1,6 @@
 # Sixth Ward Tool Library
 
-`[Your name]`
+`salem.`
 
 A three-screen static site for a neighborhood tool lending library. Members browse the catalog, open a tool, and place a hold for pickup.
 
