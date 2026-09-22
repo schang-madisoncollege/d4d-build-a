@@ -1,0 +1,11 @@
+# Installed packages. npm install recreates this folder, so it never goes in the repository.
+node_modules/
+
+# Operating system debris
+.DS_Store
+Thumbs.db
+
+# dist/styles.css is committed on purpose. A static host that runs no build step
+# can only serve CSS that is already in the repository. When the agent adds new
+# utility classes, the running watcher rebuilds this file. Commit it along with
+# the HTML that uses those classes.

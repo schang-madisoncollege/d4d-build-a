@@ -1,0 +1,122 @@
+{
+  "categories": [
+    { "id": "hand-tools", "label": "Hand tools" },
+    { "id": "power-tools", "label": "Power tools" },
+    { "id": "yard", "label": "Yard" },
+    { "id": "plumbing", "label": "Plumbing" },
+    { "id": "automotive", "label": "Automotive" },
+    { "id": "ladders", "label": "Ladders" }
+  ],
+  "tools": [
+    {
+      "id": "cordless-drill",
+      "name": "Cordless Drill",
+      "category": "power-tools",
+      "summary": "An 18-volt drill with two batteries and a charger.",
+      "availability": "available",
+      "due_back": null,
+      "requires_orientation": false,
+      "members_only": false,
+      "deposit": 40
+    },
+    {
+      "id": "circular-saw",
+      "name": "Circular Saw",
+      "category": "power-tools",
+      "summary": "A 7-1/4 inch corded circular saw with a rip fence.",
+      "availability": "checked_out",
+      "due_back": "2026-10-14",
+      "requires_orientation": true,
+      "members_only": false,
+      "deposit": 35
+    },
+    {
+      "id": "wet-dry-vacuum",
+      "name": "Wet/Dry Vacuum",
+      "category": "power-tools",
+      "summary": "A 12-gallon shop vacuum for wet and dry cleanup.",
+      "availability": "repair",
+      "due_back": null,
+      "requires_orientation": false,
+      "members_only": false,
+      "deposit": 0
+    },
+    {
+      "id": "socket-set",
+      "name": "Socket Set",
+      "category": "automotive",
+      "summary": "A 40-piece metric and SAE socket set with a ratchet.",
+      "availability": "available",
+      "due_back": null,
+      "requires_orientation": false,
+      "members_only": true,
+      "deposit": 0
+    },
+    {
+      "id": "extension-ladder",
+      "name": "Extension Ladder",
+      "category": "ladders",
+      "summary": "A 24-foot fiberglass extension ladder rated to 300 pounds.",
+      "availability": "available",
+      "due_back": null,
+      "requires_orientation": true,
+      "members_only": true,
+      "deposit": 60
+    },
+    {
+      "id": "hedge-trimmer",
+      "name": "Hedge Trimmer",
+      "category": "yard",
+      "summary": "A 22-inch corded hedge trimmer with a dual-action blade.",
+      "availability": "checked_out",
+      "due_back": "2026-10-19",
+      "requires_orientation": true,
+      "members_only": false,
+      "deposit": 25
+    },
+    {
+      "id": "pipe-wrench-set",
+      "name": "Pipe Wrench Set",
+      "category": "plumbing",
+      "summary": "Three heavy-duty pipe wrenches in 10, 14, and 18 inch sizes.",
+      "availability": "available",
+      "due_back": null,
+      "requires_orientation": false,
+      "members_only": false,
+      "deposit": 0
+    },
+    {
+      "id": "drain-auger",
+      "name": "Drain Auger",
+      "category": "plumbing",
+      "summary": "A 50-foot powered drain auger for main line clogs.",
+      "availability": "available",
+      "due_back": null,
+      "requires_orientation": true,
+      "members_only": false,
+      "deposit": 25
+    },
+    {
+      "id": "post-hole-digger",
+      "name": "Post Hole Digger",
+      "category": "yard",
+      "summary": "A manual clamshell post hole digger with hardwood handles.",
+      "availability": "available",
+      "due_back": null,
+      "requires_orientation": false,
+      "members_only": false,
+      "deposit": 0
+    },
+    {
+      "id": "bolt-cutters",
+      "name": "Bolt Cutters",
+      "category": "hand-tools",
+      "summary": "A 36-inch bolt cutter. Withdrawn from the collection in 2025.",
+      "availability": "retired",
+      "due_back": null,
+      "requires_orientation": false,
+      "members_only": false,
+      "deposit": 0
+    }
+  ]
+}

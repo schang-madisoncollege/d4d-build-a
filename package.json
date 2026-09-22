@@ -1,0 +1,21 @@
+{
+  "name": "d4d-build-a",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sixth Ward Tool Library, Build A for Designing for Development (10-201-132)",
+  "scripts": {
+    "dev": "concurrently --names css,site --prefix-colors cyan,green \"npm:watch:css\" \"npm:serve\"",
+    "watch:css": "tailwindcss -i src/input.css -o dist/styles.css --watch",
+    "build:css": "tailwindcss -i src/input.css -o dist/styles.css",
+    "serve": "serve . -l 3000"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "concurrently": "^9.2.4",
+    "serve": "^14.2.6",
+    "tailwindcss": "^4.3.3"
+  }
+}
