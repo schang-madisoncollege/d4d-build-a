@@ -7,8 +7,20 @@ const statusStyles = {
 };
 
 const filterStorageKey = 'sixth-ward-catalog-filters';
+// Derive the site root from this script rather than assuming the app is hosted
+// at the domain root. This supports hosts such as GitHub Pages project sites.
+const siteRoot = new URL('.', document.currentScript.src);
+const siteBasePath = siteRoot.pathname.replace(/\/$/, '');
 let catalog = null;
 let filters = loadFilters();
+
+function siteUrl(path = '') {
+  return new URL(path.replace(/^\/+/, ''), siteRoot).href;
+}
+
+function sitePath(path = '') {
+  return new URL(path.replace(/^\/+/, ''), siteRoot).pathname;
+}
 
 function loadFilters() {
   try {
@@ -71,7 +83,7 @@ function header() {
   return `
     <header class="border-b border-border bg-surface-raised">
       <nav aria-label="Main navigation" class="px-5 pb-6 pt-[30px] sm:px-10">
-        <a class="font-display text-lg font-semibold leading-none text-ink" href="/" data-route>Sixth Ward Tool Library</a>
+        <a class="font-display text-lg font-semibold leading-none text-ink" href="${sitePath()}" data-route>Sixth Ward Tool Library</a>
       </nav>
     </header>`;
 }
@@ -86,9 +98,9 @@ function emptyState() {
 
 function card(tool) {
   return `
-    <a href="/tool/${encodeURIComponent(tool.id)}" data-route aria-label="View details for ${escapeHtml(tool.name)}" class="group flex min-h-[364px] w-full flex-col overflow-hidden rounded-card border border-border bg-surface-raised text-left transition-colors hover:border-ink-muted">
+    <a href="${sitePath(`tool/${encodeURIComponent(tool.id)}`)}" data-route aria-label="View details for ${escapeHtml(tool.name)}" class="group flex min-h-[364px] w-full flex-col overflow-hidden rounded-card border border-border bg-surface-raised text-left transition-colors hover:border-ink-muted">
       <div class="flex h-60 items-center justify-center bg-surface-image">
-        <img class="h-16 w-16" src="/images/${escapeHtml(tool.category)}.svg" alt="${escapeHtml(categoryLabel(tool.category))} icon">
+        <img class="h-16 w-16" src="${siteUrl(`images/${tool.category}.svg`)}" alt="${escapeHtml(categoryLabel(tool.category))} icon">
       </div>
       <div class="flex flex-1 flex-col items-start gap-2 p-4">
         <p class="text-sm leading-5 text-ink-muted">${escapeHtml(categoryLabel(tool.category))}</p>
@@ -184,7 +196,7 @@ function renderNotFound() {
   app.innerHTML = `
     ${header()}
     <main class="mx-auto max-w-[1440px] px-5 pb-16 pt-12 sm:px-10">
-      <a class="inline-flex items-center text-base text-accent hover:text-accent-hover" href="/" data-route>&larr; Back to catalog</a>
+      <a class="inline-flex items-center text-base text-accent hover:text-accent-hover" href="${sitePath()}" data-route>&larr; Back to catalog</a>
       <section class="mt-8 max-w-[640px] rounded-card border border-border bg-surface-raised p-6">
         <h1 class="font-display text-xl font-semibold text-ink">Tool not found</h1>
         <p class="mt-3 text-base text-ink-muted">This tool is not in the current catalog.</p>
@@ -204,10 +216,10 @@ function renderDetail(id) {
   app.innerHTML = `
     ${header()}
     <main class="mx-auto max-w-[1440px] px-5 pb-16 pt-10 sm:px-10">
-      <a class="inline-flex items-center text-base text-accent hover:text-accent-hover" href="/" data-route>&larr; Back to catalog</a>
+      <a class="inline-flex items-center text-base text-accent hover:text-accent-hover" href="${sitePath()}" data-route>&larr; Back to catalog</a>
       <section class="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-[640px_minmax(0,1fr)] lg:gap-10">
         <div class="flex h-[360px] w-full max-w-[640px] items-center justify-center rounded-card border border-border bg-surface-raised sm:h-[480px]">
-          <img class="h-24 w-24" src="/images/${escapeHtml(tool.category)}.svg" alt="${escapeHtml(categoryLabel(tool.category))} icon">
+          <img class="h-24 w-24" src="${siteUrl(`images/${tool.category}.svg`)}" alt="${escapeHtml(categoryLabel(tool.category))} icon">
         </div>
         <div class="flex max-w-[540px] flex-col items-start gap-4 lg:pt-2">
           <p class="text-sm leading-5 text-ink-muted">${escapeHtml(categoryLabel(tool.category))}</p>
@@ -218,7 +230,7 @@ function renderDetail(id) {
             ${detailLines(tool).map((line) => `<li>${escapeHtml(line)}</li>`).join('')}
           </ul>
           ${actionEnabled
-            ? `<a class="mt-2 inline-flex h-[51px] w-[150px] items-center justify-center rounded-sm bg-accent text-base text-accent-ink transition-colors hover:bg-accent-hover" href="/tool/${encodeURIComponent(tool.id)}/hold" data-route>${actionLabel}</a>`
+            ? `<a class="mt-2 inline-flex h-[51px] w-[150px] items-center justify-center rounded-sm bg-accent text-base text-accent-ink transition-colors hover:bg-accent-hover" href="${sitePath(`tool/${encodeURIComponent(tool.id)}/hold`)}" data-route>${actionLabel}</a>`
             : `<button class="mt-2 inline-flex h-[51px] w-[150px] cursor-not-allowed items-center justify-center rounded-sm bg-disabled text-base text-disabled-ink" type="button" disabled>Unavailable</button>`}
         </div>
       </section>
@@ -253,13 +265,17 @@ function renderConfirmation(id) {
         <ul class="mt-2 list-disc space-y-1 pl-5 text-sm leading-5 text-ink-muted">
           ${holdItems(tool).map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
         </ul>
-        <a class="mt-auto pt-6 text-base text-accent underline underline-offset-4 hover:text-accent-hover" href="/" data-route>Back to catalog</a>
+        <a class="mt-auto pt-6 text-base text-accent underline underline-offset-4 hover:text-accent-hover" href="${sitePath()}" data-route>Back to catalog</a>
       </section>
     </main>`;
 }
 
 function routeFromLocation() {
-  const path = window.location.pathname.replace(/\/+$/, '') || '/';
+  const pathname = window.location.pathname;
+  const appPath = siteBasePath && (pathname === siteBasePath || pathname.startsWith(`${siteBasePath}/`))
+    ? pathname.slice(siteBasePath.length) || '/'
+    : pathname;
+  const path = appPath.replace(/\/+$/, '') || '/';
   const holdMatch = path.match(/^\/tool\/([^/]+)\/hold$/);
   const detailMatch = path.match(/^\/tool\/([^/]+)$/);
   const staticPage = document.body.dataset.staticPage;
@@ -292,7 +308,7 @@ function interceptRoutes(event) {
 
 async function start() {
   try {
-    const response = await fetch('/data/tools.json');
+    const response = await fetch(siteUrl('data/tools.json'));
     if (!response.ok) throw new Error('Catalog could not be loaded');
     catalog = await response.json();
     renderRoute();
